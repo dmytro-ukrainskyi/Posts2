@@ -7,11 +7,19 @@
 
 import UIKit
 
+protocol UsersViewControllerDelegate: AnyObject {
+    
+    func changeUser(to newUser: User)
+    
+}
+
 class UsersViewController: UIViewController {
     
     // MARK: Public Properties
     
-    var userID: Int?
+    var user: User?
+    
+    weak var delegate: UsersViewControllerDelegate?
 
     // MARK: Private Properties
     
@@ -33,15 +41,11 @@ class UsersViewController: UIViewController {
     // MARK: Private Methods
     
     private func loadUsers() {
-        guard let userID else { return }
-        
         Task {
             do {
                 tableView.showActivityIndicator()
                 
                 users = try await userService.fetchUsers()
-                
-                title = try await userService.fetchUserWith(id: userID).name
                 
                 tableView.reloadData()
                 tableView.clearBackgroundView()
@@ -75,7 +79,8 @@ private extension UsersViewController {
     }
     
     func setupNavigationBar() {
-        title = "-"
+        title = user?.name
+
         setupBackButton()
     }
     
@@ -169,6 +174,17 @@ extension UsersViewController: UITableViewDelegate {
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        delegate?.changeUser(to: users[indexPath.row])
+        
+        navigationController?.popViewController(animated: true)
     }
     
 }

@@ -14,7 +14,12 @@ final class PostsViewController: UIViewController {
     private let postService: PostService = RealPostService()
     private let userService: UserService = RealUserService()
     
-    private var userID: Int = 1
+    private var user: User? {
+        didSet {
+            title = user?.name
+        }
+    }
+    
     private var posts: [Post] = []
     
     private let tableView = UITableView()
@@ -25,18 +30,19 @@ final class PostsViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
-        loadUserName()
-        loadPosts()
+        loadUserWith(id: Constants.defaultUserID)
+        loadPostsOfUserWith(id: Constants.defaultUserID)
     }
     
     // MARK: Private Methods
     
-    private func loadPosts() {
+    private func loadPostsOfUserWith(id: Int) {
         Task {
             do {
                 tableView.showActivityIndicator()
                 
-                posts = try await postService.fetchPostsForUserWith(id: userID)
+                posts = try await postService
+                    .fetchPostsForUserWith(id: id)
                 
                 tableView.reloadData()
                 tableView.clearBackgroundView()
@@ -46,10 +52,10 @@ final class PostsViewController: UIViewController {
         }
     }
     
-    private func loadUserName() {
+    private func loadUserWith(id: Int) {
         Task {
             do {
-                title = try await userService.fetchUserWith(id: userID).name
+                user = try await userService.fetchUserWith(id: id)
             } catch {
                 tableView.show(error: error as NSError)
             }
@@ -58,7 +64,7 @@ final class PostsViewController: UIViewController {
     
     @objc
     func handleRefreshControl() {
-        loadPosts()
+        loadPostsOfUserWith(id: user?.id ?? Constants.defaultUserID)
         
         DispatchQueue.main.async {
             self.tableView.refreshControl?.endRefreshing()
@@ -68,7 +74,9 @@ final class PostsViewController: UIViewController {
     @objc
     func openUsersViewController() {
         let usersViewController = UsersViewController()
-        usersViewController.userID = userID
+        
+        usersViewController.user = user
+        usersViewController.delegate = self
         
         navigationController?
             .pushViewController(usersViewController, animated: true)
@@ -191,6 +199,29 @@ extension PostsViewController: UITableViewDelegate {
         
         navigationController?
             .pushViewController(commentsViewController, animated: true)
+    }
+    
+}
+
+// MARK: UsersViewControllerDelegate
+
+extension PostsViewController: UsersViewControllerDelegate {
+    
+    func changeUser(to newUser: User) {
+        user = newUser
+        loadPostsOfUserWith(id: user?.id ?? Constants.defaultUserID)
+    }
+    
+}
+
+// MARK: Constants
+
+private extension PostsViewController {
+    
+    enum Constants {
+        
+        static let defaultUserID: Int = 1
+        
     }
     
 }
