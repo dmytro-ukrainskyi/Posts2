@@ -65,6 +65,15 @@ final class PostsViewController: UIViewController {
         }
     }
     
+    @objc
+    func openUsersViewController() {
+        let usersViewController = UsersViewController()
+        usersViewController.userID = userID
+        
+        navigationController?
+            .pushViewController(usersViewController, animated: true)
+    }
+    
 }
 
 // MARK: - UI
@@ -74,8 +83,24 @@ private extension PostsViewController {
     func setupUI() {
         view.backgroundColor = .systemBackground
         
+        setupNavigationBar()
         setupTableView()
         setupRefreshControl()
+    }
+    
+    func setupNavigationBar() {
+        let usersButtonImage = UIImage(named: Images.users)
+        
+        let usersButton = UIBarButtonItem(
+            image: usersButtonImage,
+            style: .plain,
+            target: self,
+            action: #selector(openUsersViewController)
+        )
+        
+        usersButton.tintColor = .label
+        
+        navigationItem.rightBarButtonItem = usersButton
     }
     
     func setupTableView() {
