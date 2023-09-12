@@ -23,8 +23,16 @@ final class RealUserService: UserService {
     // MARK: Public Methods
     
     func fetchUsers() async throws -> [User] {
-        // TODO: Bonus Task
-        return []
+        let url = URL(string: usersAPI)
+        
+        do {
+            return try await urlSession.fetchDataWith(
+                url: url,
+                jsonDecoder: jsonDecoder
+            )
+        } catch {
+            throw error
+        }
     }
     
     func fetchUserWith(id: Int) async throws -> User {
