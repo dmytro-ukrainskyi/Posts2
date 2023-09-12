@@ -17,7 +17,11 @@ class CommentsViewController: UIViewController {
     
     private let commentService: CommentService = RealCommentService()
     
-    private var comments: [Comment] = []
+    private var comments: [Comment] = [] {
+        didSet {
+            title = "Comments (\(comments.count))"
+        }
+    }
     
     private let tableView = UITableView()
     
@@ -40,8 +44,6 @@ class CommentsViewController: UIViewController {
                 tableView.showActivityIndicator()
                 
                 comments = try await commentService.fetchCommentsForPostWith(id: postID)
-                
-                title = "Comments (\(comments.count))"
                 
                 tableView.reloadData()
                 tableView.clearBackgroundView()
@@ -76,6 +78,7 @@ private extension CommentsViewController {
     
     func setupNavigationBar() {
         title = "Comments (0)"
+        
         setupBackButton()
     }
     
