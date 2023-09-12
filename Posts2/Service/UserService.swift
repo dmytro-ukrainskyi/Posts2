@@ -14,17 +14,48 @@ protocol UserService {
     
 }
 
-final class MockUserService: UserService {
+final class RealUserService: UserService {
+    
+    private let usersAPI = "https://jsonplaceholder.typicode.com/users"
+    private let urlSession: URLSession = URLSession.shared
+    private let jsonDecoder: JSONDecoder = JSONDecoder()
+    
+    // MARK: Public Methods
     
     func fetchUsers() async throws -> [User] {
-        [
-            User(id: 1, name: "Test Name", username: "Test Username"),
-            User(id: 2, name: "Test Name 2", username: "Test Username 2")
-        ]
+        // TODO: Bonus Task
+        return []
     }
     
     func fetchUserWith(id: Int) async throws -> User {
-        User(id: id, name: "Test Name", username: "Test Username")
+        let url = generateURLForUserWith(id: id)
+        
+        do {
+            let usersResponce: [User] = try await urlSession.fetchDataWith(
+                url: url,
+                jsonDecoder: jsonDecoder
+            )
+            
+            guard let user = usersResponce.first else {
+                throw NSError(
+                    domain: "Posts",
+                    code: 1,
+                    userInfo: [NSLocalizedDescriptionKey: "No user with id \(id)"])
+            }
+            
+            return user
+        } catch {
+            throw error
+        }
+    }
+    
+    // MARK: Private Methods
+    
+    private func generateURLForUserWith(id: Int) -> URL? {
+        let url: URL? = URL(string: usersAPI)
+        let idQuery = URLQueryItem(name: "id", value: "\(id)")
+        
+        return url?.appending(queryItems: [idQuery])
     }
     
 }

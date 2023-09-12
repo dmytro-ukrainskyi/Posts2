@@ -13,17 +13,36 @@ protocol CommentService {
     
 }
 
-final class MockCommentService: CommentService {
+final class RealCommentService: CommentService {
+    
+    // MARK: Private Properties
+    
+    private let postsAPI = "https://jsonplaceholder.typicode.com/comments"
+    private let urlSession: URLSession = URLSession.shared
+    private let jsonDecoder: JSONDecoder = JSONDecoder()
+    
+    // MARK: Public Methods
     
     func fetchCommentsForPostWith(id postID: Int) async throws -> [Comment] {
-        let mockComment = Comment(
-            id: 1,
-            postID: postID,
-            name: "Test Name",
-            email: "test@testmail.com",
-            body: "Test Body"
-        )
-        return Array(repeating: mockComment, count: 10)
+        let url = generateURLForCommentsOfPostWith(id: postID)
+        
+        do {
+            return try await urlSession.fetchDataWith(
+                url: url,
+                jsonDecoder: jsonDecoder
+            )
+        } catch {
+            throw error
+        }
+    }
+    
+    // MARK: Private Methods
+    
+    private func generateURLForCommentsOfPostWith(id postID: Int) -> URL? {
+        let url: URL? = URL(string: postsAPI)
+        let postQuery = URLQueryItem(name: "postId", value: "\(postID)")
+        
+        return url?.appending(queryItems: [postQuery])
     }
     
 }

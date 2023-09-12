@@ -15,7 +15,7 @@ class CommentsViewController: UIViewController {
     
     // MARK: Private Properties
     
-    private let commentService: CommentService = MockCommentService()
+    private let commentService: CommentService = RealCommentService()
     
     private var comments: [Comment] = []
     

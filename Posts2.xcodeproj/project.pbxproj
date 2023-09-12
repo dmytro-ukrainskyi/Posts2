@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		138470E02AB0EAE500ECFC2E /* URLSession + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138470DF2AB0EAE500ECFC2E /* URLSession + Extensions.swift */; };
 		13D8F59B2AB08ED500119557 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D8F5982AB08ED500119557 /* Comment.swift */; };
 		13D8F59C2AB08ED500119557 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D8F5992AB08ED500119557 /* User.swift */; };
 		13D8F59D2AB08ED500119557 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D8F59A2AB08ED500119557 /* Post.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		138470DF2AB0EAE500ECFC2E /* URLSession + Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession + Extensions.swift"; sourceTree = "<group>"; };
 		13D8F57F2AB08DD600119557 /* Posts2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posts2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13D8F5982AB08ED500119557 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		13D8F5992AB08ED500119557 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -91,8 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				13D8F5982AB08ED500119557 /* Comment.swift */,
-				13D8F5992AB08ED500119557 /* User.swift */,
 				13D8F59A2AB08ED500119557 /* Post.swift */,
+				13D8F5992AB08ED500119557 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				13D8F5A32AB08F1400119557 /* UITableView + Extensions.swift */,
+				138470DF2AB0EAE500ECFC2E /* URLSession + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -116,8 +119,8 @@
 		13D8F5A62AB08F1B00119557 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				13D8F5CC2AB093E300119557 /* Info.plist */,
 				13D8F5A72AB08F1B00119557 /* Assets.xcassets */,
+				13D8F5CC2AB093E300119557 /* Info.plist */,
 				13D8F5A82AB08F1B00119557 /* LaunchScreen.storyboard */,
 			);
 			path = Resource;
@@ -218,9 +221,9 @@
 		13D8F5C52AB08F3200119557 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				13D8F5C62AB08F3200119557 /* UserService.swift */,
-				13D8F5C72AB08F3200119557 /* PostService.swift */,
 				13D8F5C82AB08F3200119557 /* CommentService.swift */,
+				13D8F5C72AB08F3200119557 /* PostService.swift */,
+				13D8F5C62AB08F3200119557 /* UserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				13D8F5C32AB08F2A00119557 /* PostsViewController.swift in Sources */,
 				13D8F5C92AB08F3200119557 /* UserService.swift in Sources */,
 				13D8F5C22AB08F2A00119557 /* CommentCell.swift in Sources */,
+				138470E02AB0EAE500ECFC2E /* URLSession + Extensions.swift in Sources */,
 				13D8F5A02AB08EF000119557 /* Constants.swift in Sources */,
 				13D8F5CA2AB08F3200119557 /* PostService.swift in Sources */,
 				13D8F5A52AB08F1400119557 /* UITableView + Extensions.swift in Sources */,

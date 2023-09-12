@@ -11,8 +11,8 @@ final class PostsViewController: UIViewController {
     
     // MARK: Private Properties
     
-    private let postService: PostService = MockPostService()
-    private let userService: UserService = MockUserService()
+    private let postService: PostService = RealPostService()
+    private let userService: UserService = RealUserService()
     
     private var userID: Int = 1
     private var posts: [Post] = []
