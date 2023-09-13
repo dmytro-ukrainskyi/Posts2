@@ -17,7 +17,11 @@ class UsersViewController: UIViewController {
     
     // MARK: Public Properties
     
-    var user: User?
+    var user: User? {
+        didSet {
+            title = user?.name
+        }
+    }
     
     weak var delegate: UsersViewControllerDelegate?
 
@@ -75,15 +79,9 @@ private extension UsersViewController {
         
         setupTableView()
         setupRefreshControl()
-        setupNavigationBar()
-    }
-    
-    func setupNavigationBar() {
-        title = user?.name
-
         setupBackButton()
     }
-    
+
     func setupBackButton() {
         let backButtonImage = UIImage(systemName: Images.back)
         let backButton = UIBarButtonItem(image: backButtonImage,
