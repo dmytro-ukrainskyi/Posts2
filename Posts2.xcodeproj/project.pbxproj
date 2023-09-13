@@ -82,8 +82,8 @@
 		13D8F5812AB08DD600119557 /* Posts2 */ = {
 			isa = PBXGroup;
 			children = (
-				13D8F59E2AB08EF000119557 /* Constants */,
-				13D8F5A12AB08F1400119557 /* Extensions */,
+				13D8F59E2AB08EF000119557 /* Constant */,
+				13D8F5A12AB08F1400119557 /* Extension */,
 				13D8F5972AB08ED500119557 /* Model */,
 				13D8F5A62AB08F1B00119557 /* Resource */,
 				13D8F5AE2AB08F2200119557 /* Root */,
@@ -103,21 +103,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		13D8F59E2AB08EF000119557 /* Constants */ = {
+		13D8F59E2AB08EF000119557 /* Constant */ = {
 			isa = PBXGroup;
 			children = (
 				13D8F59F2AB08EF000119557 /* Constants.swift */,
 			);
-			path = Constants;
+			path = Constant;
 			sourceTree = "<group>";
 		};
-		13D8F5A12AB08F1400119557 /* Extensions */ = {
+		13D8F5A12AB08F1400119557 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				13D8F5A32AB08F1400119557 /* UITableView + Extensions.swift */,
 				138470DF2AB0EAE500ECFC2E /* URLSession + Extensions.swift */,
 			);
-			path = Extensions;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		13D8F5A62AB08F1B00119557 /* Resource */ = {
